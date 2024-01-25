@@ -30,6 +30,7 @@
   <img src="./download-removebg-preview (3).png" alt="">
   <p>bowl counter: <span id="counter">0</span></p>
   <button id="incrementBtn">+</button>
+  <button id="decre">-</button>
   <summary>
     hi
     <details id="h">
@@ -57,8 +58,11 @@
     }
 
       document.getElementById('incrementBtn').addEventListener('click', () => {
-      socket.emit('increment');
-    });
+      socket.emit('increment')
+    })
+    document.getElementById("decre").addEventListener('click',()=>{
+      socket.emit("decrement")
+    })
   </script>
 </body>
 </html>
