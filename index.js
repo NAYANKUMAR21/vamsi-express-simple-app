@@ -9,7 +9,7 @@ let name="mohan"
 let counter = 0;
 io.on('connection', (socket) => {
   // Send the current counter value to a new user
-  io.emit("name",name)
+  io.emit("displayer",name)
   io.emit("updateCounter",counter)
   // Listen for button clicks
   socket.on('increment', () => {
@@ -18,8 +18,7 @@ io.on('connection', (socket) => {
     io.emit('updateCounter', counter);
   });
   socket.on("name",(nam)=>{
-    name+=nam
-    io.emit("name",nam)
+    io.emit("displayer",nam)
   })
 
   // You can add more functionality like decrement, reset, etc., in a similar way

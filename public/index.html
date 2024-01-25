@@ -45,7 +45,7 @@
     socket.on('updateCounter', (value) => {
       document.getElementById('counter').innerText = value;
     });
-    socket.on("name",(value)=>{
+    socket.on("displayer",(value)=>{
       console.log(value)
       document.getElementById("h").innerHTML+=(value)
     })
