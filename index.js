@@ -13,7 +13,7 @@ io.on('connection', (socket) => {
   io.emit("updateCounter",counter)
   // Listen for button clicks
   socket.on('increment', () => {
-    // Increment the counter and broadcast the updated value to all clients
+    // Increment the counter
     counter++;
     io.emit('updateCounter', counter);
   });
@@ -22,7 +22,10 @@ io.on('connection', (socket) => {
     io.emit("name",nam)
   })
 
-  // You can add more functionality like decrement, reset, etc., in a similar way
+  // i can add more functionality like decrement, reset, etc., in a similar way
+  socket.on("decrement",()=>{
+    counter--
+    io.emit("updateCounter",counter)
 });
 
 app.use(express.static(__dirname + '/public'));
