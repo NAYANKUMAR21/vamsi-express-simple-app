@@ -1,68 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Global Counter App</title>
-  <style>
-    #magic{
-      display: none;
-      animation: magie 2s 1;
-      position: absolute;
-    }
-    @keyframes magie {
-      0%{
-        top:0px;
-      }
-      50%{
-        top:50%;
-      }
-      70%{
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Global Counter App</title>
+    <style>
+      #magic {
         display: none;
+        animation: magie 2s 1;
+        position: absolute;
       }
-    }
-  </style>
-</head>
-<body>
-  <h1>Global Counter</h1>
-  <input placeholder="name" id="name">
-  <button id="sub">submit</button>
-  <img src="./download-removebg-preview (3).png" alt="">
-  <p>bowl counter: <span id="counter">0</span></p>
-  <button id="incrementBtn">+</button>
-  <button id="decre">-</button>
-  <summary>
-    hi
-    <details id="h">
-      <summary>names pressed</summary>
-    </details>
-  </summary>
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    const socket = io();
-    const sub=document.getElementById("sub")
-    const name=document.getElementById("name")
-    // Update the counter value on the page
-    socket.on('updateCounter', (value) => {
-      document.getElementById('counter').innerText = value;
-    });
-    socket.on("displayer",(value)=>{
-      console.log(value)
-      document.getElementById("h").innerHTML+=(value)
-    })
-    // Send an increment event to the server when the button is clicked
-    sub.onclick=
-    ()=>{
-    console.log(name.value)
-    socket.emit("name",`<li>${name.value}</li>`)
-    }
+      @keyframes magie {
+        0% {
+          top: 0px;
+        }
+        50% {
+          top: 50%;
+        }
+        70% {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Global Counter</h1>
+    <input placeholder="name" id="name" />
+    <button id="sub">submit</button>
+    <img src="./download-removebg-preview (3).png" alt="" />
+    <p>bowl counter: <span id="counter">0</span></p>
+    <button id="incrementBtn">+</button>
+    <button id="decre">-</button>
+    <summary>
+      hi
+      <details id="h">
+        <summary>names pressed</summary>
+      </details>
+    </summary>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+      const sub = document.getElementById('sub');
+      const name = document.getElementById('name');
+      // Update the counter value on the page
+      socket.on('updateCounter', (value) => {
+        document.getElementById('counter').innerText = value;
+      });
+      socket.on('displayer', (value) => {
+        console.log(value);
+        document.getElementById('h').innerHTML += value;
+      });
+      // Send an increment event to the server when the button is clicked
+      sub.onclick = () => {
+        console.log(name.value);
+        socket.emit('name', `<li>${name.value}</li>`);
+      };
 
       document.getElementById('incrementBtn').addEventListener('click', () => {
-      socket.emit('increment')
-    })
-    document.getElementById("decre").addEventListener('click',()=>{
-      socket.emit("decrement")
-    })
-  </script>
-</body>
+        socket.emit('increment');
+      });
+      document.getElementById('decre').addEventListener('click', () => {
+        socket.emit('decrement');
+      });
+    </script>
+  </body>
 </html>
